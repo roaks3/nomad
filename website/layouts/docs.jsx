@@ -3,10 +3,11 @@ import order from '../data/docs-navigation.js'
 import { frontMatter } from '../pages/docs/**/*.mdx'
 import { MDXProvider } from '@mdx-js/react'
 import Placement from '../components/placement-table'
+import EnterpriseAlert from '../components/enterprise-alert'
 import Head from 'next/head'
 import Link from 'next/link'
 
-const DEFAULT_COMPONENTS = { Placement }
+const DEFAULT_COMPONENTS = { Placement, EnterpriseAlert }
 
 function DocsLayoutWrapper(pageMeta) {
   function DocsLayout(props) {
