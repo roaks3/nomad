@@ -2,6 +2,12 @@ name: Ember test audit
 on: pull_request
 
 jobs:
+  whaa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: whaa
+        shell: bash
+        run: echo hey
   time-master:
     runs-on: ubuntu-latest
     steps:
