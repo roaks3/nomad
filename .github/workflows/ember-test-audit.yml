@@ -50,4 +50,4 @@ jobs:
           name: pr-audit
       - name: Print results
         shell: bash
-        run: "echo 'master: ' && cat master-audit.txt && echo 'pr: ' && cat pr-audit.txt"
+        run: node .github/actions/ember-test-audit-diff/index.js master-audit.txt pr-audit.txt
