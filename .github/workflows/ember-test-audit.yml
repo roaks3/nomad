@@ -17,6 +17,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
+        run: "echo '::add-path::./node_modules/.bin/ember'"
         run: ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
@@ -36,6 +37,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
+        run: "echo '::add-path::./node_modules/.bin/ember'"
         run: ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
