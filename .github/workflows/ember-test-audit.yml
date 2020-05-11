@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.base.sha }}
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -18,7 +18,7 @@ jobs:
         run: pwd
       - name: sha maybe
         shell: bash
-        run: echo ${{ github.event.pull_request.head.sha }}
+        run: echo ${{ github.event.pull_request.base.sha }}
       - name: Audit tests
         shell: bash
         working-directory: ui
