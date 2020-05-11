@@ -17,7 +17,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
-        run: npx ember-test-audit 1 exec && mv test-timings-* ../master-audit.txt
+        run: ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
@@ -36,7 +36,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
-        run: npx ember-test-audit 1 exec && mv test-timings-* ../pr-audit.txt
+        run: ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
