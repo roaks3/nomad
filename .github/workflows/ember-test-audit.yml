@@ -12,6 +12,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      - name: pwd only lol
+        shell: bash
+        working-directory: ui
+        run: pwd
       - name: Audit tests
         shell: bash
         working-directory: ui
