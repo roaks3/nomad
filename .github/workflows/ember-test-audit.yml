@@ -16,6 +16,9 @@ jobs:
         shell: bash
         working-directory: ui
         run: pwd
+      - name: sha maybe
+        shell: bash
+        run: echo ${{ github.event.pull_request.head.sha }}
       - name: Audit tests
         shell: bash
         working-directory: ui
