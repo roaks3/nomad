@@ -47,4 +47,4 @@ jobs:
           name: pr-audit
       - name: Print results
         shell: bash
-        run: echo 'master: ' && cat master-audit.txt && echo 'pr: ' && cat pr-audit.txt
+        run: "echo 'master: ' && cat master-audit.txt && echo 'pr: ' && cat pr-audit.txt"
