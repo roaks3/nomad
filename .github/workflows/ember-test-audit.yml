@@ -7,4 +7,4 @@ jobs:
     steps:
       - name: whaa
         shell: bash
-        run: echo hey
+        run: echo 'hey: '
