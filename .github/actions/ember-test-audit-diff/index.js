@@ -1,5 +1,5 @@
 const fs = require('fs');
-const [baseFilePath, diffFilePath] = process.argv.slice(2);
+const [baseFilePath, diffFilePath, sha] = process.argv.slice(2);
 
 const baseReport = JSON.parse(fs.readFileSync(baseFilePath));
 const diffReport = JSON.parse(fs.readFileSync(diffFilePath));
@@ -13,7 +13,9 @@ const timeDiff = diffReport.duration - baseReport.duration;
 console.log(`Change in number of tests run: ${countDiff}`);
 console.log(`Change in total milliseconds for tests: ${timeDiff}`);
 
-const output = `
+const output = `A
+As of ${sha.slice(0, 7)}
+
 Change in number of tests run: ${countDiff}
 Change in total milliseconds for tests: ${timeDiff}
 `;
