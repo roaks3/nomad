@@ -183,6 +183,10 @@ module('Acceptance | allocation detail', function(hooks) {
     assert.ok(true);
   });
 
+  test('an extra lifecycle test', async function(assert) {
+    assert.ok(true);
+  });
+
   test('/allocation/:id should list all tasks for the allocation', async function(assert) {
     assert.equal(
       Allocation.tasks.length,
