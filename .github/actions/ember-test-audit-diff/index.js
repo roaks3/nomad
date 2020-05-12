@@ -13,7 +13,7 @@ const timeDiff = diffReport.duration - baseReport.duration;
 console.log(`Change in number of tests run: ${countDiff}`);
 console.log(`Change in total milliseconds for tests: ${timeDiff}`);
 
-const output = `A
+const output = `
 As of ${sha.slice(0, 7)}
 
 Change in number of tests run: ${countDiff}
