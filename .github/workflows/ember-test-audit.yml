@@ -19,6 +19,7 @@ jobs:
         working-directory: ui
         run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
+      - run: mkdir -p /tmp/test-reports
       - run: cd ui && ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
@@ -40,6 +41,7 @@ jobs:
         working-directory: ui
         run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
+      - run: mkdir -p /tmp/test-reports
       - run: cd ui && ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
