@@ -64,3 +64,8 @@ jobs:
       - name: Print results
         shell: bash
         run: node .github/actions/ember-test-audit-diff/index.js master-audit.txt pr-audit.txt
+      - uses: marocchino/sticky-pull-request-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            a test sticky message
