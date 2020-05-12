@@ -67,4 +67,3 @@ jobs:
       - uses: backspace/sticky-pull-request-comment@file-path
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          path: audit-diff.txt
