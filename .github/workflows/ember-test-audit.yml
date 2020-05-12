@@ -17,7 +17,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
-      - run: "echo \"::add-path::./node_modules/.bin/ember\""
+        run: "echo \"::add-path::./node_modules/.bin/ember\""
       - run: echo $PATH
       - run: ember test
       - name: Upload result
@@ -38,7 +38,7 @@ jobs:
       - name: Audit tests
         shell: bash
         working-directory: ui
-      - run: "echo \"::add-path::./node_modules/.bin/ember\""
+        run: "echo \"::add-path::./node_modules/.bin/ember\""
       - run: echo $PATH
       - run: ember test
       - name: Upload result
