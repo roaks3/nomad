@@ -1,5 +1,5 @@
 import { run } from '@ember/runloop';
-import { currentURL } from '@ember/test-helpers';
+import { currentURL, waitFor } from '@ember/test-helpers';
 import { assign } from '@ember/polyfills';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
@@ -176,6 +176,9 @@ module('Acceptance | allocation detail', function(hooks) {
 
     await Allocation.lifecycleChart.tasks[0].visit();
     assert.equal(currentURL(), `/allocations/${allocation.id}/${sortedServerStates[0].name}`);
+
+    await waitFor('.jortles', { timeout: 100000 });
+    assert.ok(true);
   });
 
   test('/allocation/:id should list all tasks for the allocation', async function(assert) {
