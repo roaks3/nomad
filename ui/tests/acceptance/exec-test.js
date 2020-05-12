@@ -1,5 +1,5 @@
 import { module, skip, test } from 'qunit';
-import { currentURL, settled } from '@ember/test-helpers';
+import { currentURL, settled, waitFor } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import Service from '@ember/service';
@@ -55,6 +55,9 @@ module('Acceptance | exec', function(hooks) {
     assert.equal(Exec.header.job, this.job.name);
 
     assert.notOk(Exec.jobDead.isPresent);
+
+    await waitFor('.jortles', { timeout: 100000 });
+    assert.ok(true);
   });
 
   test('/exec/:job should not show region and namespace when there are none', async function(assert) {
