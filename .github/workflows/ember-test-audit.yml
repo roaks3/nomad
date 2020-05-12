@@ -68,4 +68,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           message: |
-            a test sticky message
+            an updated test sticky message
