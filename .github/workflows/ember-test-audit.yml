@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - run: yarn --frozen-lockfile
+      - run: cd ui && yarn --frozen-lockfile
       - name: Audit tests
         shell: bash
         working-directory: ui
@@ -34,7 +34,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - run: yarn --frozen-lockfile
+      - run: cd ui && yarn --frozen-lockfile
       - name: Audit tests
         shell: bash
         working-directory: ui
