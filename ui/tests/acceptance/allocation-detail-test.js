@@ -75,7 +75,7 @@ module('Acceptance | allocation detail', function(hooks) {
   });
 
   test('/allocation/:id should present task lifecycles', async function(assert) {
-    assert.timeout(999999999999);
+    assert.timeout(9999999);
     const job = server.create('job', {
       groupsCount: 1,
       groupTaskCount: 3,
