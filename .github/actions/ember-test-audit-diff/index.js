@@ -19,6 +19,13 @@ const timeDiff = diffMillisecondTimeString - baseMillisecondTimeString;
 console.log(`Change in number of tests run: ${countDiff}`);
 console.log(`Change in total milliseconds for tests: ${timeDiff}`);
 
+const output = `
+Change in number of tests run: ${countDiff}
+Change in total milliseconds for tests: ${timeDiff}
+`;
+
+fs.writeFileSync('audit-diff.txt', output);
+
 function readFileFirstLine(path) {
   try {
     const data = fs.readFileSync(path, 'UTF-8');
