@@ -19,8 +19,7 @@ jobs:
         working-directory: ui
         run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
-      - run: cd ui && npx ember-test-audit 1 exec
-      - run: mv ui/test-timings* master-audit.txt
+      - run: cd ui && ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
@@ -41,8 +40,7 @@ jobs:
         working-directory: ui
         run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
-      - run: cd ui && npx ember-test-audit 1 exec
-      - run: mv ui/test-timings* pr-audit.txt
+      - run: cd ui && ember test
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
