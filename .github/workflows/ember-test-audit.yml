@@ -14,10 +14,6 @@ jobs:
         with:
           node-version: '10.x'
       - run: cd ui && yarn --frozen-lockfile
-      - name: Audit tests
-        shell: bash
-        working-directory: ui
-        run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
       - run: cd ui && npx github:backspace/ember-test-audit#json 1 lifecycle --json
@@ -37,10 +33,6 @@ jobs:
         with:
           node-version: '10.x'
       - run: cd ui && yarn --frozen-lockfile
-      - name: Audit tests
-        shell: bash
-        working-directory: ui
-        run: "echo \"::add-path::./node_modules/.bin\""
       - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
       - run: cd ui && npx github:backspace/ember-test-audit#json 1 lifecycle --json
