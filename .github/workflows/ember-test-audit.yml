@@ -1,6 +1,10 @@
 name: Ember test audit comparison
 on: pull_request
 
+defaults:
+  run:
+    working-directory: ui
+
 jobs:
   time-master:
     runs-on: ubuntu-latest
@@ -13,11 +17,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - run: cd ui && yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
-      - run: cd ui && npx github:backspace/ember-test-audit#json 1 lifecycle --json
-      - run: mv ui/test-timings* master-audit.txt
+      - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
+      - run: mv test-timings* master-audit.txt
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
@@ -32,11 +36,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - run: cd ui && yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
-      - run: cd ui && npx github:backspace/ember-test-audit#json 1 lifecycle --json
-      - run: mv ui/test-timings* pr-audit.txt
+      - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
+      - run: mv test-timings* pr-audit.txt
       - name: Upload result
         uses: actions/upload-artifact@v2
         with:
