@@ -61,12 +61,12 @@ jobs:
         with:
           name: pr-audit
       - uses: backspace/ember-test-audit-comparison-action@primary
-          with:
-            base-report-path: master-audit.txt
-            comparison-report-path: pr-audit.txt
-            base-identifier: master # FIXME could be something else
-            comparison-identifier: ${{ github.event.pull_request.base.sha }} # FIXME restore truncation?
-            output-path: audit-diff.txt
+        with:
+          base-report-path: master-audit.txt
+          comparison-report-path: pr-audit.txt
+          base-identifier: master # FIXME could be something else
+          comparison-identifier: ${{ github.event.pull_request.base.sha }} # FIXME restore truncation?
+          output-path: audit-diff.txt
       - uses: marocchino/sticky-pull-request-comment@33a6cfb
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
