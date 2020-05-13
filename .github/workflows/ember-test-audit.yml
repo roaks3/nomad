@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: '10.x'
       - run: yarn --frozen-lockfile
-      - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
       - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
       - run: mv test-timings* master-audit.txt
@@ -37,7 +36,6 @@ jobs:
         with:
           node-version: '10.x'
       - run: yarn --frozen-lockfile
-      - run: echo $PATH
       - run: mkdir -p /tmp/test-reports
       - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
       - run: mv test-timings* pr-audit.txt
