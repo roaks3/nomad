@@ -65,7 +65,7 @@ jobs:
           base-report-path: master-audit.txt
           comparison-report-path: pr-audit.txt
           base-identifier: master # FIXME could be something else
-          comparison-identifier: ${{ github.event.pull_request.base.sha }}
+          comparison-identifier: ${{ github.event.pull_request.head.sha }}
           output-path: audit-diff.txt
       - uses: marocchino/sticky-pull-request-comment@33a6cfb
         with:
