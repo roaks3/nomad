@@ -5,6 +5,9 @@ defaults:
   run:
     working-directory: ui
 
+# There’s currently no way to share steps between jobs so there’s a lot of duplication
+# for running the audit for the base and PR.
+  
 jobs:
   time-master:
     runs-on: ubuntu-latest
