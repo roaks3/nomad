@@ -1,4 +1,4 @@
-name: Ember test audit
+name: Ember test audit comparison
 on: pull_request
 
 jobs:
