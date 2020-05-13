@@ -1,6 +1,24 @@
 name: Ember test audit
 on: pull_request
 
+shared-steps:
+  - &chromedriver
+    uses: nanasess/setup-chromedriver@master
+  - &node
+    name: Use Node.js
+    uses: actions/setup-node@v1
+    with:
+      node-version: '10.x'
+  - &yarn
+    name: Install dependencies
+    working-directory: ui
+    run: yarn --frozen-lockfile
+  - &create-report-destination 
+    run: mkdir -p /tmp/test-reports
+  - &audit-tests
+    run: npx github:backspace/ember-test-audit#json 3 --json
+    working-directory: ui
+
 jobs:
   time-master:
     runs-on: ubuntu-latest
@@ -8,19 +26,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.base.sha }}
-      - uses: nanasess/setup-chromedriver@master
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - run: cd ui && yarn --frozen-lockfile
-      - name: Audit tests
-        shell: bash
-        working-directory: ui
-        run: "echo \"::add-path::./node_modules/.bin\""
-      - run: echo $PATH
-      - run: mkdir -p /tmp/test-reports
-      - run: cd ui && npx github:backspace/ember-test-audit#json 3 --json
+      - *chromedriver
+      - *node
+      - *yarn
+      - *create-report-destination
+      - *audit-tests
       - run: mv ui/test-timings* master-audit.txt
       - name: Upload result
         uses: actions/upload-artifact@v2
@@ -31,19 +41,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: nanasess/setup-chromedriver@master
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - run: cd ui && yarn --frozen-lockfile
-      - name: Audit tests
-        shell: bash
-        working-directory: ui
-        run: "echo \"::add-path::./node_modules/.bin\""
-      - run: echo $PATH
-      - run: mkdir -p /tmp/test-reports
-      - run: cd ui && npx github:backspace/ember-test-audit#json 3 --json
+      - *chromedriver
+      - *node
+      - *yarn
+      - *create-report-destination
+      - *audit-tests
       - run: mv ui/test-timings* pr-audit.txt
       - name: Upload result
         uses: actions/upload-artifact@v2
