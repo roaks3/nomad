@@ -54,16 +54,19 @@ jobs:
     needs: [time-master, time-pr]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
           name: master-audit
       - uses: actions/download-artifact@v2
         with:
           name: pr-audit
-      - name: Print results
-        shell: bash
-        run: node .github/actions/ember-test-audit-diff/index.js master-audit.txt pr-audit.txt ${{ github.event.pull_request.head.sha }}
+      - uses: backspace/ember-test-audit-comparison-action@primary
+          with:
+            base-report-path: master-audit.txt
+            comparison-report-path: pr-audit.txt
+            base-identifier: master # FIXME could be something else
+            comparison-identifier: ${{ github.event.pull_request.base.sha }} # FIXME restore truncation?
+            output-path: audit-diff.txt
       - uses: marocchino/sticky-pull-request-comment@33a6cfb
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
