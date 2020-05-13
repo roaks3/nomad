@@ -64,7 +64,7 @@ jobs:
       - name: Print results
         shell: bash
         run: node .github/actions/ember-test-audit-diff/index.js master-audit.txt pr-audit.txt ${{ github.event.pull_request.head.sha }}
-      - uses: backspace/sticky-pull-request-comment@file-path
+      - uses: marocchino/sticky-pull-request-comment@33a6cfb
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           path: audit-diff.txt
