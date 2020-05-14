@@ -22,7 +22,7 @@ jobs:
           node-version: '10.x'
       - run: yarn --frozen-lockfile
       - run: mkdir -p /tmp/test-reports
-      - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
+      - run: npx ember-test-audit 1 lifecycle --json
       - run: mv test-timings* ../base-audit.json
       - name: Upload result
         uses: actions/upload-artifact@v2
@@ -40,7 +40,7 @@ jobs:
           node-version: '10.x'
       - run: yarn --frozen-lockfile
       - run: mkdir -p /tmp/test-reports
-      - run: npx github:backspace/ember-test-audit#json 1 lifecycle --json
+      - run: npx ember-test-audit 1 lifecycle --json
       - run: mv test-timings* ../pr-audit.json
       - name: Upload result
         uses: actions/upload-artifact@v2
