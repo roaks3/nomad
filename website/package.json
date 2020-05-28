@@ -52,6 +52,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "prebuild": "./scripts/simulate-versions.sh",
     "build": "node --max-old-space-size=2048 ./node_modules/.bin/next build",
     "export": "node --max-old-space-size=2048 ./node_modules/.bin/next export",
     "format": "next-hashicorp format",
