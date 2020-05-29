@@ -103,3 +103,16 @@ azure-hashistack.pem
 
 # generated keys for e2e tests
 e2e/terraform/keys/
+
+website/content/api-docs/v1*
+website/content/api-docs/v2*
+website/content/api-docs/v3*
+website/content/api-docs/v4*
+website/content/api-docs/v5*
+website/content/api-docs/v6*
+website/content/api-docs/v7*
+website/content/api-docs/v8*
+website/content/api-docs/v9*
+website/content/api-docs/v0*
+website/content/docs/docs-v*
+website/content/intro/intro-v*
