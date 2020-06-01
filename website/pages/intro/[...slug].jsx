@@ -13,16 +13,18 @@ import {
   paragraphCustomAlerts,
   typography,
 } from '@hashicorp/remark-plugins'
-import { frontMatter as sidenavData } from '../../content/intro/**/*.mdx'
 import introFiles from '../../data/.tmp/intro-files'
-import order from '../../data/intro-navigation.js'
 
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
+const STUBBED_SIDENAV_DATA = [
+  {
+    layout: 'intro',
+    page_title: 'Test',
+    sidebar_title: 'use-cases',
+    description: 'Test',
+    __resourcePath: 'intro/use-cases.mdx',
+  },
+]
+const STUBBED_ORDER = ['use-cases']
 
 export default function IntroPage({
   renderedContent,
@@ -44,8 +46,8 @@ export default function IntroPage({
         Link,
         category: 'intro',
         currentPage: `/${url}`,
-        data: sidenavData,
-        order,
+        data: STUBBED_SIDENAV_DATA,
+        order: STUBBED_ORDER,
       }}
       resourceURL={`https://github.com/hashicorp/nomad/blob/master/website/${filePath}`}
     >

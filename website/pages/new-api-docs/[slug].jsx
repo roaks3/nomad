@@ -13,15 +13,17 @@ import {
   paragraphCustomAlerts,
   typography,
 } from '@hashicorp/remark-plugins'
-import { frontMatter as sidenavData } from '../../content/api-docs/**/*.mdx'
-import order from '../../data/api-navigation.js'
 
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
+const STUBBED_SIDENAV_DATA = [
+  {
+    layout: 'api',
+    page_title: 'Test',
+    sidebar_title: 'namespaces',
+    description: 'Test',
+    __resourcePath: 'api-docs/namespaces.mdx',
+  },
+]
+const STUBBED_ORDER = ['namespaces']
 
 export default function ApiDocsPage({
   renderedContent,
@@ -43,8 +45,8 @@ export default function ApiDocsPage({
         Link,
         category: 'api-docs',
         currentPage: `/${url}`,
-        data: sidenavData,
-        order,
+        data: STUBBED_SIDENAV_DATA,
+        order: STUBBED_ORDER,
       }}
       resourceURL={`https://github.com/hashicorp/nomad/blob/master/website/${filePath}`}
     >
