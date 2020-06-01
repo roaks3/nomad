@@ -15,18 +15,20 @@ import {
   typography,
 } from '@hashicorp/remark-plugins'
 import Placement from '../../components/placement-table'
-import { frontMatter as sidenavData } from '../../content/docs/**/*.mdx'
 import docFiles from '../../data/.tmp/docs-files'
-import order from '../../data/docs-navigation.js'
 
 const DEFAULT_COMPONENTS = { Placement }
 
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
+const STUBBED_SIDENAV_DATA = [
+  {
+    layout: 'docs',
+    page_title: 'Test',
+    sidebar_title: 'faq',
+    description: 'Test',
+    __resourcePath: 'docs/faq.mdx',
+  },
+]
+const STUBBED_ORDER = ['faq']
 
 export default function DocsDocsPage({
   renderedContent,
@@ -49,8 +51,8 @@ export default function DocsDocsPage({
           Link,
           category: 'docs',
           currentPage: `/${url}`,
-          data: sidenavData,
-          order,
+          data: STUBBED_SIDENAV_DATA,
+          order: STUBBED_ORDER,
         }}
         resourceURL={`https://github.com/hashicorp/nomad/blob/master/website/${filePath}`}
       >
