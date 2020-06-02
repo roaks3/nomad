@@ -55,7 +55,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prebuild": "node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js",
+    "prebuild": "./scripts/simulate-versions.sh && node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js",
     "build": "next build",
     "export": "next export",
     "format": "next-hashicorp format",
