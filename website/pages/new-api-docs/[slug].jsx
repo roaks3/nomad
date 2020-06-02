@@ -13,15 +13,8 @@ import {
   paragraphCustomAlerts,
   typography,
 } from '@hashicorp/remark-plugins'
-import { frontMatter as sidenavData } from '../../content/api-docs/**/*.mdx'
+import sidenavData from '../../data/.tmp/api-docs-frontmatter'
 import order from '../../data/api-navigation.js'
-
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
 
 export default function ApiDocsPage({
   renderedContent,

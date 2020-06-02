@@ -13,16 +13,9 @@ import {
   paragraphCustomAlerts,
   typography,
 } from '@hashicorp/remark-plugins'
-import { frontMatter as sidenavData } from '../../content/intro/**/*.mdx'
 import introFiles from '../../data/.tmp/intro-files'
+import sidenavData from '../../data/.tmp/intro-frontmatter'
 import order from '../../data/intro-navigation.js'
-
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
 
 export default function IntroPage({
   renderedContent,

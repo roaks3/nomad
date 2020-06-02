@@ -15,18 +15,11 @@ import {
   typography,
 } from '@hashicorp/remark-plugins'
 import Placement from '../../components/placement-table'
-import { frontMatter as sidenavData } from '../../content/docs/**/*.mdx'
 import docFiles from '../../data/.tmp/docs-files'
+import sidenavData from '../../data/.tmp/docs-frontmatter'
 import order from '../../data/docs-navigation.js'
 
 const DEFAULT_COMPONENTS = { Placement }
-
-sidenavData.forEach((d) => {
-  d.__resourcePath = d.__resourcePath.replace(
-    `${process.cwd().slice(1)}/content/`,
-    ''
-  )
-})
 
 export default function DocsDocsPage({
   renderedContent,
