@@ -23,8 +23,8 @@ async function getAllFilesRecursively(dirPath) {
 
 function printAllFilesRecursively(dirPath) {
   getAllFilesRecursively(dirPath).then((filePaths) => {
-    console.log('export default [')
-    filePaths.map((filePath) =>
+    console.log('module.exports = [')
+    filePaths.forEach((filePath) =>
       console.log(`  '${filePath.replace(new RegExp(`^${dirPath}/`), '')}',`)
     )
     console.log(']')
