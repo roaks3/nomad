@@ -55,7 +55,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prebuild": "node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-docs-frontmatter.js > data/.tmp/docs-frontmatter.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js && node scripts/print-intro-frontmatter.js > data/.tmp/intro-frontmatter.js && node scripts/print-api-docs-frontmatter.js > data/.tmp/api-docs-frontmatter.js",
+    "prebuild": "./scripts/simulate-versions.sh && node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-docs-frontmatter.js > data/.tmp/docs-frontmatter.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js && node scripts/print-intro-frontmatter.js > data/.tmp/intro-frontmatter.js && node scripts/print-api-docs-frontmatter.js > data/.tmp/api-docs-frontmatter.js",
     "build": "next build",
     "export": "next export",
     "format": "next-hashicorp format",
