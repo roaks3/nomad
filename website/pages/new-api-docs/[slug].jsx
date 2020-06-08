@@ -49,9 +49,11 @@ export default function ApiDocsPage({
 export async function getStaticProps({ params }) {
   const filePath = `content/api-docs/${params.slug}.mdx`
   const url = `new-api-docs/${params.slug}`
-  const fileContent = (
-    await promisify(fs.readFile)(`${process.cwd()}/${filePath}`)
-  ).toString()
+  const fileContent = await (
+    await fetch(
+      `https://raw.githubusercontent.com/hashicorp/nomad/stable-website/website/pages/api-docs/${params.slug}.mdx`
+    )
+  ).text()
 
   const { content, data } = matter(fileContent)
 
