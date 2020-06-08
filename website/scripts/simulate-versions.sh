@@ -1,4 +1,4 @@
-NUM_ARCHIVED_VERSIONS=1
+NUM_ARCHIVED_VERSIONS=9
 
 mkdir content/api-docs-archived
 
