@@ -4,6 +4,7 @@ import { promisify } from 'util'
 import matter from 'gray-matter'
 import Head from 'next/head'
 import Link from 'next/link'
+import highlight from '@mapbox/rehype-prism'
 import { MDXProvider } from '@mdx-js/react'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
@@ -68,6 +69,7 @@ export async function getStaticProps({ params }) {
       paragraphCustomAlerts,
       typography,
     ],
+    rehypePlugins: [[highlight, { ignoreMissing: true }]],
   })
 
   return {
