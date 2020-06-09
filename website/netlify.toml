@@ -11,3 +11,6 @@
 
 [context.deploy-preview]
   environment = { HASHI_ENV = "staging" }
+
+[[plugins]]
+package = "netlify-plugin-cache-nextjs"
