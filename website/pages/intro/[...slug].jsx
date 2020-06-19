@@ -2,6 +2,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import highlight from '@mapbox/rehype-prism'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
@@ -21,6 +22,11 @@ export default function IntroPage({
   filePath,
   url,
 }) {
+  const router = useRouter()
+  if (router.isFallback) {
+    return <div></div>
+  }
+
   const hydratedContent = hydrate(renderedContent)
   return (
     <DocsPage
@@ -45,7 +51,7 @@ export default function IntroPage({
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const filePath = `content/intro/${params.slug.join('/')}.mdx`
   const url = `intro/${params.slug.join('/')}`
   const fileContent = await (
@@ -72,5 +78,12 @@ export async function getServerSideProps({ params }) {
       filePath,
       url,
     },
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
   }
 }

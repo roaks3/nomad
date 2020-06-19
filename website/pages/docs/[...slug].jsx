@@ -2,6 +2,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import highlight from '@mapbox/rehype-prism'
 import { MDXProvider } from '@mdx-js/react'
 import hydrate from 'next-mdx-remote/hydrate'
@@ -25,6 +26,11 @@ export default function DocsDocsPage({
   filePath,
   url,
 }) {
+  const router = useRouter()
+  if (router.isFallback) {
+    return <div></div>
+  }
+
   const hydratedContent = hydrate(renderedContent)
   return (
     <MDXProvider components={DEFAULT_COMPONENTS}>
@@ -51,7 +57,7 @@ export default function DocsDocsPage({
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const filePath = `content/docs/${params.slug.join('/')}.mdx`
   const url = `docs/${params.slug.join('/')}`
 
@@ -79,5 +85,12 @@ export async function getServerSideProps({ params }) {
       filePath,
       url,
     },
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
   }
 }
