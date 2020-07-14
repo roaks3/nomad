@@ -37,8 +37,10 @@
     "marked": "^0.7.0",
     "next": "9.3.6",
     "next-mdx-remote": "^0.4.0",
+    "nodegit": "^0.26.5",
     "nprogress": "^0.2.0",
     "nuka-carousel": "^4.6.7",
+    "path-to-regexp": "^6.1.0",
     "react": "^16.13.1",
     "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1"
@@ -55,7 +57,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prebuild": "./scripts/simulate-versions.sh && node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-docs-frontmatter.js > data/.tmp/docs-frontmatter.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js && node scripts/print-intro-frontmatter.js > data/.tmp/intro-frontmatter.js && node scripts/print-api-docs-frontmatter.js > data/.tmp/api-docs-frontmatter.js",
+    "prebuild": "node scripts/print-docs-files.js > data/.tmp/docs-files.js && node scripts/print-docs-frontmatter.js > data/.tmp/docs-frontmatter.js && node scripts/print-intro-files.js > data/.tmp/intro-files.js && node scripts/print-intro-frontmatter.js > data/.tmp/intro-frontmatter.js && node scripts/print-api-docs-frontmatter.js > data/.tmp/api-docs-frontmatter.js",
     "build": "next build",
     "dev": "rm -rf .next/cache/next-babel-loader/ && next dev",
     "export": "next export",

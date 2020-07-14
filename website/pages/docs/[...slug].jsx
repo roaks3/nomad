@@ -1,5 +1,9 @@
+import fs from 'fs'
 import path from 'path'
+import { promisify } from 'util'
 import matter from 'gray-matter'
+import git from 'nodegit'
+import { pathToRegexp, match } from 'path-to-regexp'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -17,17 +21,22 @@ import {
 import Placement from '../../components/placement-table'
 import sidenavData from '../../data/.tmp/docs-frontmatter'
 import order from '../../data/docs-navigation.js'
+import siteManifest from '../../site-manifest.json'
 
 const DEFAULT_COMPONENTS = { Placement }
 
 export default function DocsDocsPage({
   renderedContent,
   frontMatter,
-  filePath,
+  resourceUrl,
   url,
 }) {
   const router = useRouter()
   if (router.isFallback) {
+    return <div></div>
+  }
+
+  if (!renderedContent) {
     return <div></div>
   }
 
@@ -49,7 +58,7 @@ export default function DocsDocsPage({
           data: sidenavData,
           order,
         }}
-        resourceURL={`https://github.com/hashicorp/nomad/blob/master/website/${filePath}`}
+        resourceURL={resourceUrl}
       >
         {hydratedContent}
       </DocsPage>
@@ -58,14 +67,60 @@ export default function DocsDocsPage({
 }
 
 export async function getStaticProps({ params }) {
-  const filePath = `content/docs/${params.slug.join('/')}.mdx`
   const url = `docs/${params.slug.join('/')}`
 
-  const fileContent = await (
-    await fetch(
-      `https://raw.githubusercontent.com/hashicorp/nomad/stable-website/website/pages/${url}.mdx`
-    )
-  ).text()
+  const firstMatchingRoute = siteManifest.routes.find((route) =>
+    pathToRegexp(route.pattern).test('/' + url)
+  )
+
+  const { version: versionParam, path: contentPathParam } = match(
+    firstMatchingRoute.pattern
+  )(`/${url}`).params
+
+  const versionConfig =
+    versionParam === 'stable'
+      ? firstMatchingRoute.versions[0]
+      : firstMatchingRoute.versions.find((v) => v.slug === versionParam)
+
+  const filePath = `${firstMatchingRoute.directory}/${contentPathParam.join(
+    '/'
+  )}.mdx`
+  const gitPath = `${versionConfig?.sha_lock || 'master'}/${filePath}`
+
+  let fileContent
+  if (process.env.USE_LOCAL_VERSIONED_CONTENT === 'true') {
+    if (!versionConfig && versionParam !== 'latest') {
+      // probably want a 404 or redirect
+      return {
+        props: {},
+      }
+    }
+
+    if (versionParam === 'latest') {
+      // For latest version, just use local files, which may include in-progress changes from the developer
+      fileContent = (
+        await promisify(fs.readFile)(`${process.cwd()}/../${filePath}`)
+      ).toString()
+    } else {
+      const repo = await git.Repository.open(path.resolve(process.cwd(), '..'))
+      const commit = await repo.getCommit(versionConfig.sha_lock)
+      const entry = await commit.getEntry(filePath)
+      const blob = await entry.getBlob()
+
+      fileContent = blob.toString()
+    }
+  } else {
+    if (!versionConfig) {
+      // probably want a 404 or redirect
+      return {
+        props: {},
+      }
+    }
+
+    fileContent = await (
+      await fetch(`https://raw.githubusercontent.com/roaks3/nomad/${gitPath}`)
+    ).text()
+  }
 
   const { content, data } = matter(fileContent)
   const renderedContent = await renderToString(content, DEFAULT_COMPONENTS, {
@@ -82,7 +137,7 @@ export async function getStaticProps({ params }) {
     props: {
       renderedContent,
       frontMatter: data,
-      filePath,
+      resourceUrl: `https://github.com/roaks3/nomad/blob/${gitPath}`,
       url,
     },
   }
